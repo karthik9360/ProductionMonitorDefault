@@ -17,7 +17,7 @@ class Command(BaseCommand):
         global mqtt_client
         mqtt_client = mqtt.Client()
         global default_data_interval
-        default_data_interval = 5
+        default_data_interval = 10
 
         def on_connect(client, userdata, flags, rc):
             if rc == 0:
@@ -206,13 +206,13 @@ class Command(BaseCommand):
             while True:
                 try:
                     default_data = {
-                        "device_token": "default_token",
-                        "cmd": "DEFAULT_CMD",
+                        "device_token": "Device123",
+                        "Device123": "Dev",
                         "timestamp": int(datetime.datetime.now().timestamp())
                     }
-                    publish_topic = "default/topic"
+                    publish_topic = "topic"
                     mqtt_client.publish(publish_topic, json.dumps(default_data))
-                    print(f"Default data published to {publish_topic}: {default_data}")
+                    print(f"Published to {publish_topic}: {default_data}")
                 except Exception as e:
                     print(f'Error publishing default data: {e}')
                 time.sleep(default_data_interval)
